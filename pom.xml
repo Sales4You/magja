@@ -4,7 +4,7 @@
 	<groupId>com.google.code.magja</groupId>
 	<artifactId>magja</artifactId>
 	<packaging>bundle</packaging>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.4-SALES4YOU</version>
 	<name>Magja Java Connector for Magento API</name>
 	<description>
         Magja is a java connector for access the Magento API (http://www.magentocommerce.com/support/magento_core_api),
@@ -207,6 +207,13 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.springframework.build</groupId>
+				<artifactId>aws-maven</artifactId>
+				<version>5.0.0.RELEASE</version>
+			</extension>
+		</extensions>
 	</build>
 
 	<profiles>
@@ -308,14 +315,14 @@
 
 	<distributionManagement>
 		<repository>
-			<id>sonatype-nexus-staging</id>
-			<name>Sonatype Nexus Staging</name>
-			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+			<id>maven-s3-release-repo</id>
+			<name>AWS Release Repository</name>
+			<url>s3://repository.java.s4u/releases</url>
 		</repository>
 		<snapshotRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Sonatype Nexus Snapshots</name>
-			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+			<id>maven-s3-snapshot-repo</id>
+			<name>AWS Snapshot Repository</name>
+			<url>s3://repository.java.s4u/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
