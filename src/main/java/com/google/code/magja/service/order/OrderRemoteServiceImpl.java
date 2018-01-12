@@ -105,8 +105,13 @@ public class OrderRemoteServiceImpl extends GeneralServiceImpl<Order> implements
 
         // items
         if (attributes.get("items") != null) {
-
-            Collection<Map> maps = ((HashMap) attributes.get("items")).values();
+            // Check if return is Marabraz custom items response
+            Collection<Map> maps = null;
+            if (attributes.get("items") instanceof HashMap) {
+                maps = ((HashMap) attributes.get("items")).values();
+            } else {
+                maps = ((Collection<Map>) attributes.get("items"));
+            }
 
             for (Map map : maps) {
                 OrderItem item = new OrderItem();
