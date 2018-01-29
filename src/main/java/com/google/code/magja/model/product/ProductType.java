@@ -6,6 +6,10 @@ package com.google.code.magja.model.product;
 
 public class ProductType {
 
+    public ProductType() {
+        super();
+    }
+
   private String name;
   private String code;
 
