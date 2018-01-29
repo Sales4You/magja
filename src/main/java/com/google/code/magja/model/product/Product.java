@@ -40,6 +40,7 @@ public class Product extends BaseMagentoModel<Object[]> {
   private Boolean inStock;
   private Boolean manageStock;
   private Boolean useConfigManageStock;
+
   private List<ProductMedia> medias;
   private Set<ProductLink> links;
   private List<ProductTierPrice> tierPrices = new ArrayList<ProductTierPrice>();
@@ -454,7 +455,6 @@ public class Product extends BaseMagentoModel<Object[]> {
       throw new InvalidParameterException("the product media cannot be null");
     if (this.medias == null)
       this.medias = new ArrayList<ProductMedia>();
-    media.setProduct(this);
     this.medias.add(media);
   }
 

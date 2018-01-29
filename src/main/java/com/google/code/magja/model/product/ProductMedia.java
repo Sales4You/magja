@@ -36,8 +36,6 @@ public class ProductMedia extends BaseMagentoModel<Object[]> {
 
   private Boolean stillAssigned = Boolean.FALSE;
 
-  private Product product;
-
   private String label;
 
   private Boolean exclude;
@@ -83,25 +81,10 @@ public class ProductMedia extends BaseMagentoModel<Object[]> {
 
     props.put("file", image.serializeToApi());
 
-    return new Object[] { product.getSku(), props };
+    return new Object[] { props };
   }
 
-  /**
-   * @return the product
-   */
-  public Product getProduct() {
-    return product;
-  }
-
-  /**
-   * @param product
-   *          the product to set
-   */
-  public void setProduct(Product product) {
-    this.product = product;
-  }
-
-  /**
+   /**
    * @return the label
    */
   public String getLabel() {

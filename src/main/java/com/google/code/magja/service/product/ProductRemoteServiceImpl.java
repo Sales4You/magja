@@ -86,7 +86,7 @@ public class ProductRemoteServiceImpl extends GeneralServiceImpl<Product> implem
   private Product buildProduct(Map<String, Object> mpp, Set<String> attributes, boolean dependencies) throws ServiceException {
     if (dependencies) {
       return buildProduct(mpp, attributes,
-          ImmutableSet.of(Dependency.CATEGORIES, Dependency.MEDIAS, Dependency.LINKS, Dependency.TYPES, Dependency.ATTRIBUTE_SET, Dependency.INVENTORY));
+          ImmutableSet.of(Dependency.LINKS, Dependency.TYPES, Dependency.ATTRIBUTE_SET));
     } else {
       return buildProduct(mpp, attributes, ImmutableSet.<Dependency> of());
     }
@@ -113,10 +113,13 @@ public class ProductRemoteServiceImpl extends GeneralServiceImpl<Product> implem
 
     // attribute values
     Map<String, Object> attributeValues = new HashMap<String, Object>();
-    for (String attrCode : attributes) {
-      Object attrValue = mpp.get(attrCode);
-      attributeValues.put(attrCode, attrValue);
+
+
+    for (Map.Entry<String, Object> entry : mpp.entrySet()) {
+      attributeValues.put(entry.getKey(), entry.getValue());
     }
+
+
     product.setAttributes(attributeValues);
 
     // product visibility
@@ -382,7 +385,7 @@ public class ProductRemoteServiceImpl extends GeneralServiceImpl<Product> implem
 
   @Override
   public Product getBySku(String sku, boolean dependencies) throws ServiceException {
-    return getBySku(sku, ImmutableSet.<String> of(), dependencies);
+    return getBySku(sku, null, dependencies);
   }
 
   public Product getBySku(String sku, Set<String> attributes, Set<Dependency> dependencies) throws ServiceException {
@@ -577,7 +580,6 @@ public class ProductRemoteServiceImpl extends GeneralServiceImpl<Product> implem
 
   /**
    * @param product
-   * @param existingProduct
    * @throws ServiceException
    */
   protected void doAssignCategories(Product product, List<Category> existingCategories) throws ServiceException {
@@ -640,7 +642,6 @@ public class ProductRemoteServiceImpl extends GeneralServiceImpl<Product> implem
 
   /**
    * @param product
-   * @param found
    * @param existingMedias
    * @throws ServiceException
    */

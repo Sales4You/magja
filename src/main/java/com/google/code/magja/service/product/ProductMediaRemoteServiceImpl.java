@@ -61,9 +61,6 @@ public class ProductMediaRemoteServiceImpl extends GeneralServiceImpl<ProductMed
    */
   @Override
   public void delete(ProductMedia productMedia) throws ServiceException {
-    if (!ProductServiceUtil.validateProduct(productMedia.getProduct()))
-      throw new ServiceException("the product attribute for the media must be setted.");
-
     // List<Object> params = new LinkedList<Object>();
     // params.add((productMedia.getProduct().getId() != null ? productMedia
     // .getProduct().getId() : productMedia.getProduct().getSku()));
@@ -71,8 +68,7 @@ public class ProductMediaRemoteServiceImpl extends GeneralServiceImpl<ProductMed
 
     Boolean success = false;
     try {
-      success = (Boolean) soapClient.callArgs(ResourcePath.ProductAttributeMediaRemove, new Object[] {
-          productMedia.getProduct().getId() != null ? productMedia.getProduct().getId() : productMedia.getProduct().getSku(), productMedia.getFile() });
+      success = (Boolean) soapClient.callArgs(ResourcePath.ProductAttributeMediaRemove, new Object[] { productMedia.getFile() });
     } catch (AxisFault e) {
       if (debug)
         e.printStackTrace();
@@ -164,7 +160,6 @@ public class ProductMediaRemoteServiceImpl extends GeneralServiceImpl<ProductMed
 
     for (Map<String, Object> media : medias) {
       ProductMedia productMedia = buildProductMedia(media);
-      productMedia.setProduct(product);
       result.add(productMedia);
     }
 
@@ -180,10 +175,7 @@ public class ProductMediaRemoteServiceImpl extends GeneralServiceImpl<ProductMed
    */
   @Override
   public void create(ProductMedia productMedia) throws ServiceException {
-    if (!ProductServiceUtil.validateProduct(productMedia.getProduct()))
-      throw new ServiceException("the product attribute for the media must be setted.");
-
-    if (productMedia.getImage() == null)
+     if (productMedia.getImage() == null)
       throw new ServiceException("the image is null.");
 
     if (productMedia.getImage().getData() == null)
@@ -204,9 +196,6 @@ public class ProductMediaRemoteServiceImpl extends GeneralServiceImpl<ProductMed
 
   @Override
   public Boolean update(ProductMedia productMedia) throws ServiceException {
-    if (!ProductServiceUtil.validateProduct(productMedia.getProduct()))
-      throw new ServiceException("the product attribute for the media must be setted.");
-
     Map<String, Object> props = productMedia.getAllProperties();
     String[] str_types = new String[productMedia.getTypes().size()];
     int i = 0;
@@ -231,7 +220,7 @@ public class ProductMediaRemoteServiceImpl extends GeneralServiceImpl<ProductMed
 
     try {
       Boolean result = (Boolean) soapClient.callArgs(ResourcePath.ProductAttributeMediaUpdate,
-          new Object[] { productMedia.getProduct().getSku(), productMedia.getFile(), props.remove("url") });
+          new Object[] { productMedia.getFile(), props.remove("url") });
       return result;
     } catch (AxisFault e) {
       if (debug)

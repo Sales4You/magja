@@ -192,7 +192,6 @@ public class MagentoSoapClient implements SoapClient {
   /**
    * Public version of call.
    *
-   * @see com.google.code.magja.soap.SoapClient#callArgs(com.google.code.magja.magento
    *      .ResourcePath, Object[])
    */
   @Override
@@ -221,7 +220,13 @@ public class MagentoSoapClient implements SoapClient {
   public <R> R call(final String pathString, Object args) throws AxisFault {
     // Convert array input to List<Object>
     if (args != null && args.getClass().isArray()) {
-      args = Arrays.asList((Object[]) args);
+        List<Object> argsArray = Arrays.asList((Object[]) args);
+        if(!argsArray.isEmpty()) {
+            args = argsArray;
+        } else {
+            args = null;
+        }
+
     }
     log.info("Calling {} {} at {}@{} with session {}", new Object[] { pathString, args, config.getApiUser(), config.getRemoteHost(), sessionId });
     OMElement method = callFactory.createCall(sessionId, pathString, args);

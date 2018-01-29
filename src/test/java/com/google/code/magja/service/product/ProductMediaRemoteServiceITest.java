@@ -66,7 +66,6 @@ public class ProductMediaRemoteServiceITest {
     productService.add(product, null);
 
     ProductMedia productMedia = ObjectFactory.readMedia();
-    productMedia.setProduct(product);
     service.create(productMedia);
 
     assertTrue(productMedia.getFile() != null);
