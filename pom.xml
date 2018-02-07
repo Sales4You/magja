@@ -4,7 +4,7 @@
 	<groupId>com.google.code.magja</groupId>
 	<artifactId>magja</artifactId>
 	<packaging>bundle</packaging>
-	<version>1.11.0-KLINK</version>
+	<version>1.20.0-KLINK</version>
 	<name>Magja Java Connector for Magento API</name>
 	<description>
         Magja is a java connector for access the Magento API (http://www.magentocommerce.com/support/magento_core_api),
@@ -13,16 +13,13 @@
         installation. For more information visit the project page.
     </description>
 	<url>https://github.com/magja/magja</url>
-
 	<properties>
 		<axis2.version>1.6.2</axis2.version>
 		<slf4j.version>1.7.21</slf4j.version>
 		<logback.version>1.0.6</logback.version>
 		<guava.version>12.0</guava.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- <skipTests>true</skipTests> -->
 	</properties>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -111,17 +108,6 @@
 			<version>1.2.13</version>
 			<scope>compile</scope>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.apache.httpcomponents</groupId> -->
-		<!-- <artifactId>httpclient</artifactId> -->
-		<!-- <version>4.2.1</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.apache.httpcomponents</groupId> -->
-		<!-- <artifactId>httpcore</artifactId> -->
-		<!-- <version>4.2.1</version> -->
-		<!-- </dependency> -->
-
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -189,7 +175,6 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.19.1</version>
 				<configuration>
-					<skipTests>${skipTests}</skipTests>
 					<excludes>
 						<exclude>**/*ITest.java</exclude>
 					</excludes>
@@ -228,7 +213,6 @@
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
 						<configuration>
-							<skipTests>${skipTests}</skipTests>
 						</configuration>
 					</plugin>
 					<plugin>
@@ -254,24 +238,9 @@
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.4</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
 						<version>2.19.1</version>
 						<configuration>
-							<skipTests>${skipTests}</skipTests>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -294,7 +263,6 @@
 								</goals>
 								<phase>integration-test</phase>
 								<configuration>
-									<skipTests>${skipTests}</skipTests>
 									<includes>
 										<include>**/*ITest.java</include>
 									</includes>
@@ -398,7 +366,6 @@
 			</roles>
 		</developer>
 	</developers>
-
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -406,5 +373,4 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-
 </project>

@@ -81,7 +81,7 @@ public class ProductAttributeSet extends BaseMagentoModel {
    * @return attribute set.
    */
   public static ProductAttributeSet getDefaultProductAttributeSet() {
-    final SoapClient soapClient = MagentoSoapClient.getInstance();
+    final SoapClient soapClient = new MagentoSoapClient().getInstance();
     Integer defaultId = soapClient.getConfig().getDefaultAttributeSetId();
     return new ProductAttributeSet(defaultId, "Default");
   }

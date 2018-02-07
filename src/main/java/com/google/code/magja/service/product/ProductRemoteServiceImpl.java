@@ -122,7 +122,6 @@ public class ProductRemoteServiceImpl extends GeneralServiceImpl<Product> implem
 
     product.setAttributes(attributeValues);
 
-    // product visibility
     if (mpp.get("visibility") != null) {
       Integer visi = new Integer(mpp.get("visibility").toString());
       switch (visi) {
@@ -146,9 +145,7 @@ public class ProductRemoteServiceImpl extends GeneralServiceImpl<Product> implem
 
     // set product type
     if (mpp.get("type") != null) {
-
       ProductType type = ProductType.getType((String) mpp.get("type"));
-
       if (type == null && dependencies.contains(Dependency.TYPES)) {
         /*
          * means its a type not covered by the enum, so we have to look in
@@ -175,9 +172,7 @@ public class ProductRemoteServiceImpl extends GeneralServiceImpl<Product> implem
     }
 
     // categories - dont get the full tree, only basic info of categories
-    if (mpp.get("categories") != null)
-
-    {
+    if (mpp.get("categories") != null) {
       if (dependencies.contains(Dependency.CATEGORIES)) {
         product.getCategories().addAll(getCategoriesBasicInfo((List<Object>) mpp.get("categories")));
       } else {

@@ -73,7 +73,7 @@ public class RemoteServiceFactory {
   @Deprecated
   public static RemoteServiceFactory getSingleton(SoapConfig soapConfig) {
     if (singletonInstance == null) {
-      singletonInstance = new RemoteServiceFactory(MagentoSoapClient.getInstance(soapConfig));
+      singletonInstance = new RemoteServiceFactory(new MagentoSoapClient().getInstance(soapConfig));
     }
     return singletonInstance;
   }

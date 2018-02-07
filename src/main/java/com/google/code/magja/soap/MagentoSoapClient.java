@@ -52,7 +52,7 @@ public class MagentoSoapClient implements SoapClient {
   private ServiceClient sender;
 
   // holds all the created instances by creation order, Multiton Pattern
-  private static final Map<SoapConfig, SoapClient> INSTANCES = new LinkedHashMap<SoapConfig, SoapClient>();
+  private Map<SoapConfig, SoapClient> INSTANCES = new LinkedHashMap<SoapConfig, SoapClient>();
 
   /**
    * Returns the default instance, or a newly created one from the
@@ -61,7 +61,7 @@ public class MagentoSoapClient implements SoapClient {
    *
    * @return the default instance or a newly created one
    */
-  public static SoapClient getInstance() {
+  public SoapClient getInstance() {
     return (INSTANCES.size() == 0) ? getInstance(null) : INSTANCES.values().iterator().next();
   }
 
@@ -71,7 +71,7 @@ public class MagentoSoapClient implements SoapClient {
    *
    * @return the already created instance or a new one
    */
-  public static SoapClient getInstance(final SoapConfig soapConfig) {
+  public SoapClient getInstance(final SoapConfig soapConfig) {
     // if has default instance and soapConfig is null
     if (INSTANCES.size() > 0 && soapConfig == null)
       return INSTANCES.values().iterator().next();
@@ -128,6 +128,10 @@ public class MagentoSoapClient implements SoapClient {
       // do not swallow, rethrow as runtime
       throw new RuntimeException("Cannot connect to Magento", e);
     }
+  }
+
+  public MagentoSoapClient() {
+
   }
 
   /**
