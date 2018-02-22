@@ -37,7 +37,7 @@ public class ProductLinkRemoteServiceITest {
 
   @Before
   public void setUp() throws Exception {
-    final RemoteServiceFactory remoteServiceFactory = new RemoteServiceFactory(MagentoSoapClient.getInstance());
+    final RemoteServiceFactory remoteServiceFactory = new RemoteServiceFactory(new MagentoSoapClient().getInstance());
     this.service = remoteServiceFactory.getProductLinkRemoteService();
     this.productService = remoteServiceFactory.getProductRemoteService();
     this.products = ObjectFactory.generateRandomProductsAndSave(productService, 2);

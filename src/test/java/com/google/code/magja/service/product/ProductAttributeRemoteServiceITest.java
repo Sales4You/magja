@@ -37,7 +37,7 @@ public class ProductAttributeRemoteServiceITest {
   @Before
   public void setUp() throws Exception {
 
-    final RemoteServiceFactory remoteServiceFactory = new RemoteServiceFactory(MagentoSoapClient.getInstance());
+    final RemoteServiceFactory remoteServiceFactory = new RemoteServiceFactory(new MagentoSoapClient().getInstance());
     service = remoteServiceFactory.getProductAttributeRemoteService();
     defaultAttributeSet = ProductAttributeSet.getDefaultProductAttributeSet();
   }

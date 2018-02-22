@@ -119,11 +119,9 @@ public class OrderRemoteServiceImpl extends GeneralServiceImpl<Order> implements
                     for (Map.Entry<String, Object> att : i.entrySet()) {
                         item.set(att.getKey(), att.getValue());
                     }
-                    order.getItems().add(item);
                 }
+                order.getItems().add(item);
             }
-
-
         }
 
         return order;
