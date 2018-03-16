@@ -113,13 +113,11 @@ public class OrderRemoteServiceImpl extends GeneralServiceImpl<Order> implements
                 maps = ((Collection<Map>) attributes.get("items"));
             }
 
-            for (Map map : maps) {
+            for (Map<String, Object> map : maps) {
                 OrderItem item = new OrderItem();
-                for (Map<String, Object> i : maps) {
-                    for (Map.Entry<String, Object> att : i.entrySet()) {
+                    for (Map.Entry<String, Object> att : map.entrySet()) {
                         item.set(att.getKey(), att.getValue());
                     }
-                }
                 order.getItems().add(item);
             }
         }
