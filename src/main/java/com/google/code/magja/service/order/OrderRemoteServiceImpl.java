@@ -156,9 +156,16 @@ public class OrderRemoteServiceImpl extends GeneralServiceImpl<Order> implements
         try {
             order_remote = soapClient.callSingle(ResourcePath.SalesOrderInfo, id);
         } catch (AxisFault e) {
-            if (debug)
+            // Se o error for de conversão de Boolean para Map
+            // quer dizer que o PHP voltou false para a consulta
+            // depois de uma atualização na Marabraz está se comportando assim
+            // então devo ignorar se esse for o erro.
+            if(e.getMessage().contains("java.lang.Boolean cannot")) {
+                log.info("Ignorando erro por retorno false, considerando retorno como null");
+            } else {
                 e.printStackTrace();
-            throw new ServiceException(e.getMessage());
+                throw new ServiceException(e.getMessage());
+            }
         }
 
         if (order_remote == null)
@@ -174,9 +181,16 @@ public class OrderRemoteServiceImpl extends GeneralServiceImpl<Order> implements
         try {
             order_remote = soapClient.callSingle(ResourcePath.SalesOrderInfo, id);
         } catch (AxisFault e) {
-            if (debug)
+            // Se o error for de conversão de Boolean para Map
+            // quer dizer que o PHP voltou false para a consulta
+            // depois de uma atualização na Marabraz está se comportando assim
+            // então devo ignorar se esse for o erro.
+            if(e.getMessage().contains("java.lang.Boolean cannot")) {
+                log.info("Ignorando erro por retorno false, considerando retorno como null");
+            } else {
                 e.printStackTrace();
-            throw new ServiceException(e.getMessage());
+                throw new ServiceException(e.getMessage());
+            }
         }
 
         if (order_remote == null)
@@ -217,9 +231,16 @@ public class OrderRemoteServiceImpl extends GeneralServiceImpl<Order> implements
         try {
             order_list = soapClient.callSingle(ResourcePath.SalesOrderList, (filter != null ? filter.serializeToApi() : ""));
         } catch (AxisFault e) {
-            if (debug)
+            // Se o error for de conversão de Boolean para Map
+            // quer dizer que o PHP voltou false para a consulta
+            // depois de uma atualização na Marabraz está se comportando assim
+            // então devo ignorar se esse for o erro.
+            if(e.getMessage().contains("java.lang.Boolean cannot")) {
+                log.info("Ignorando erro por retorno false, considerando retorno como null");
+            } else {
                 e.printStackTrace();
-            throw new ServiceException(e.getMessage());
+                throw new ServiceException(e.getMessage());
+            }
         }
 
         for (Map<String, Object> map : order_list)
